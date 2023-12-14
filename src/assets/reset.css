@@ -1,0 +1,42 @@
+/***公共样式****/
+body, div,
+span, h1, h2, h3, h4, h5, h6,
+p, em, img, strong, b,
+small, u, i, center, dl, dt, dd, ol, ul, li,
+sub, sup, tt, var, del, dfn,  ins, kbd, q, s, samp,
+strike, applet, object, iframe, fieldset, form, label, legend, table, 
+caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, 
+embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, 
+summary, time, blockquote, pre, a, abbr, acronym, address, big, cite, code, mark, audio, 
+video, input, textarea, select 
+{ margin:0; padding:0;}	
+/* *{
+	 font-family:"Microsoft YaHei"!important;
+} */
+
+ol, ul{list-style:none;}
+li{list-style-type:none;}
+/* html { overflow-x:hidden;}
+body {font-size:14px; font-family:Microsoft YaHei,Arial; *font-family:Microsoft YaHei,'黑体'; color:#535353; background:#fff;} */
+
+/*a 链接*/
+a { text-decoration:none; outline:none; cursor:pointer;outline: none;}
+/* a:link { color:#666; } */
+a:visited { color:#666; }
+/* a:hover, a:active, a:focus { color:#f08200;} */
+em,i{font-style:normal;}
+/*图片*/
+img {
+	vertical-align:top;border:0;
+}
+/*图片表格*/
+table{border-collapse:separate;border-spacing:0;}
+/* 自定义 */
+/* .fB{font-weight:bold;}
+.f12px{font-size:12px;}
+.f14px{font-size:14px;}
+.left{float:left;}
+.right{float:right;} */
+
+/* 重定义的最先，伪类其次，自定义最后，便于自己和他人阅读！ */
+/***END公共样式****/
