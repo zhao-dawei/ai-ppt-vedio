@@ -4,7 +4,7 @@
             <ul>
                 <li v-for="(item, index) in tabs" 
                     :key="index" 
-                    :class="activeIndex === index ? 'active_li' : ''"
+                    :class="store.activeIndex === index ? 'active_li' : ''"
                     @click="handleClickTab(item,index)"
                   >
                   <p :to="item.path">{{item.name}}</p>
@@ -20,7 +20,8 @@
 
 <script setup>
 import {ref} from "vue"
-import router from "../../router";
+import router from "@/router";
+import {store} from "@/store"
 const tabs = [
   {
     path: "/course/outline",
@@ -47,11 +48,9 @@ const tabs = [
     name: "其他"
   }
 ]
-
-const activeIndex = ref(0)
 const handleClickTab = (item, ind) => {
     console.log(ind);
-    activeIndex.value = ind
+    store.activeIndex = ind
     router.push(item.path)
 }
 </script>
@@ -64,10 +63,11 @@ const handleClickTab = (item, ind) => {
     margin-right: 20px;
 }
 .link_btns ul li {
-    background: rgb(255, 242, 204);
-    padding: 10px 30px;
-    border-radius: 10px;
-    margin-bottom: 20px;
+  list-style: none;
+  background: rgb(255, 242, 204);
+  padding: 10px 30px;
+  border-radius: 10px;
+  margin-bottom: 20px;
 }
 .link_btns ul .active_li {
   color: #fff;

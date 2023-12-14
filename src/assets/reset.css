@@ -14,8 +14,8 @@ video, input, textarea, select
 	 font-family:"Microsoft YaHei"!important;
 } */
 
-ol, ul{list-style:none;}
-li{list-style-type:none;}
+/* ol, ul{list-style:none;}
+li{list-style-type:none;} */
 /* html { overflow-x:hidden;}
 body {font-size:14px; font-family:Microsoft YaHei,Arial; *font-family:Microsoft YaHei,'黑体'; color:#535353; background:#fff;} */
 

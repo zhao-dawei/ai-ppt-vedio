@@ -1,54 +1,56 @@
 <template>
-  <div class="course_content_wrapper">
-    <el-card v-loading="loading">
-      <div class="ai_talk">
-        <p class="AI_avatar">
-          <img src="@/assets/svg/chat.svg" alt="">
-        </p >
-        <span>根据课程大纲推荐课程内容如下，如需调整，可直接点击文稿调整</span>
-      </div>
-      <div class="content_wrapper">
-        <div class="outline_content">
-          <h3 class="outline_head">大纲</h3>
-          <article>
-            <p class="content_tit">第一章：课题1</p >
-            <p>第一节：节目1</p >
-            <p>第二节：节目2</p >
-            <p>第三节：节目3</p >
-          </article>
-          <article>
-            <p class="content_tit">第二章：课题2</p >
-            <p>第一节：节目1</p >
-            <p>第二节：节目2</p >
-            <p>第三节：节目3</p >
-          </article>
-          <button class="submit_btn"  @click="next">内容确认完毕,帮我生成PPT</button>
+    <div class="course_content_wrapper" v-loading="loading">
+        <div class="ai_talk">
+            <p class="AI_avatar">
+            <img src="@/assets/svg/chat.svg" alt="">
+            </p>
+            <span>根据课程大纲推荐课程内容如下，如需调整，可直接点击文稿调整</span>
         </div>
-        <div class="content_con">
-          <h3 class="outline_head">内容</h3>
-          <el-input
-              v-model="textarea"
-              type="textarea"
-              autosize="true"
-              placeholder="Please input content"
-          />
+        <div class="content_wrapper">
+            <div class="outline_content">
+              <h3 class="outline_head">大纲</h3>
+              <article>
+                <ul class="outline_ul">
+                  <li class="content_tit">第一章：课题1</li>
+                    <li>第一节：节目1</li>
+                    <li>第二节：节目2</li>
+                    <li>第三节：节目3</li>
+                </ul>
+                <ul class="outline_ul">
+                  <li class="content_tit">第二章：课题2</li>
+                    <li>第一节：节目1</li>
+                    <li>第二节：节目2</li>
+                    <li>第三节：节目3</li>
+                </ul>
+              </article>
+              <button class="submit_btn" @click="next">内容确认完毕,帮我生成PPT</button>
+            </div>
+            <div class="content_con">
+                <h3 class="outline_head">内容</h3>
+                <el-input
+                    v-model="textarea"
+                    type="textarea"
+                    autosize="true"
+                    placeholder="Please input content"
+                />
+            </div>
         </div>
-      </div>
-    </el-card>
-
-  </div>
+        
+    </div>
 </template>
 
 <script setup>
 import { ref } from 'vue'
-import router from "../../router";
+import { store } from "@/store"
+import router from "@/router";
 const textarea = ref('第一章：课题1\n\t第一节：节目1\n\t第二节：节目2\n\t第三节：节目3\n\n第二章：课题2\n\t第一节：节目1\n\t第二节：节目2\n\t第三节：节目3')
+
 const loading = ref(false)
 const next = () => {
   loading.value = true
   setTimeout(() => {
-
-    router.push('/course/ppttest')
+    store.activeIndex += 1
+    router.push('/course/ppt')
   }, 2000)
 }
 </script>
@@ -98,6 +100,15 @@ article>p:not(.content_tit) {
 
 .content_con {
     flex: 1;
-    margin-left: 20px;
+    margin-left: 40px;
+}
+
+.outline_ul {
+  margin-bottom: 10px;
+  padding: 0 10px;
+}
+.outline_ul>li:not(.content_tit) {
+  margin-left: 20px;
+  list-style-type:circle;
 }
 </style>

@@ -37,7 +37,7 @@ const asideWidth = ref(wid)
   width: 100%;
   height: 100%;
   padding: 30px;
-  background: radial-gradient(circle,#EBF5F4,#C1F5E6);
+  background:radial-gradient(circle,#EBF5F4,#C1F5E6);
   /* border-radius: 50px; */
   box-sizing: border-box;
 }
@@ -45,13 +45,12 @@ const asideWidth = ref(wid)
   width: 220px;
   line-height: 40px;
   color: #fff;
-  background: radial-gradient(circle,#80b892 0%,#13be7d 100%);
+  background: tomato;
   outline: none;
   border: none;
   border-radius: 10px;
   cursor: pointer;
   margin-top: 20px;
-  font-size: medium;
 }
 
 </style>

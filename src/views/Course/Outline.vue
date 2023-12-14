@@ -8,24 +8,31 @@
     </div>
     <div class="outline_content">
       <h3 class="outline_head">大纲</h3>
-      <article @click="dialogFormVisible = true">
-        <p class="content_tit">第一章：课题1</p>
-        <p>第一节：节目1</p>
-        <p>第二节：节目2</p>
-        <p>第三节：节目3</p>
+      <article @click="handleClickEdit" v-show="!isEdit">
+        <ul class="outline_ul">
+          <li class="content_tit">第一章：课题1</li>
+            <li>第一节：节目1</li>
+            <li>第二节：节目2</li>
+            <li>第三节：节目3</li>
+        </ul>
+        <ul class="outline_ul">
+          <li class="content_tit">第二章：课题2</li>
+            <li>第一节：节目1</li>
+            <li>第二节：节目2</li>
+            <li>第三节：节目3</li>
+        </ul>
       </article>
-      <article @click="dialogFormVisible = true">
-        <p class="content_tit">第二章：课题2</p>
-        <p>第一节：节目1</p>
-        <p>第二节：节目2</p>
-        <p>第三节：节目3</p>
-      </article>
+      <div class="edit_wrapper" v-show="isEdit">
+        <el-input type="textarea" v-model="textarea" autosize="true" />
+        <el-button type="success" @click="handleOver">完成</el-button>
+      </div>
       <button class="submit_btn" @click="next">生成对应内容</button>
     </div>
-    <el-dialog v-model="dialogFormVisible" title="修改大纲">
+    <!-- <el-dialog v-model="dialogFormVisible" title="修改大纲">
       <el-form>
         <el-form-item>
           <el-input type="textarea" v-model="textarea" autosize="true" />
+          
         </el-form-item>
       </el-form>
       <template #footer>
@@ -36,21 +43,31 @@
           </el-button>
         </span>
       </template>
-    </el-dialog>
+    </el-dialog> -->
   </div>
 </template>
 
 <script setup>
 import { ref } from "vue"
-import router from "../../router";
+import router from "@/router";
+import {store} from "@/store"
 const dialogFormVisible = ref(false)
 const textarea = ref("第一章：课题1\n\t第一节：节目1\n\t第二节：节目2\n\t第三节：节目3\n\n第二章：课题2\n\t第一节：节目1\n\t第二节：节目2\n\t第三节：节目3")
+const isEdit = ref(false)
 
 const loading = ref(false)
+
+const handleClickEdit = () => {
+  isEdit.value = true
+}
+const handleOver = () => {
+  isEdit.value = false
+}
+
 const next = () => {
   loading.value = true
   setTimeout(() => {
-
+    store.activeIndex += 1
     router.push('/course/content')
   }, 2000)
 }
@@ -97,6 +114,16 @@ article {
   line-height: 30px;
 }
 
-article>p:not(.content_tit) {
-  margin-left: 10px;
-}</style>
+.outline_ul {
+  margin-bottom: 10px;
+  padding: 0 10px;
+}
+.outline_ul>li:not(.content_tit) {
+  margin-left: 20px;
+  list-style-type:circle;
+}
+
+.edit_wrapper {
+  width: 40%;
+}
+</style>
