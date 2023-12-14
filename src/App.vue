@@ -37,7 +37,11 @@ const asideWidth = ref(wid)
   width: 100%;
   height: 100%;
   padding: 30px;
-  background: #fa998d;
+  /* background: radial-gradient(circle,#EBF5F4,#C1F5E6); */
+  background-image: linear-gradient(-225deg, #E3FDF5 0%, #FFE6FA 100%);
+  /* background-image: linear-gradient(-225deg, #2CD8D5 0%, #C5C1FF 56%, #FFBAC3 100%); */
+  /* background-image: linear-gradient(120deg, #fccb90 0%, #d57eeb 100%); */
+    /* background: white; */
   /* border-radius: 50px; */
   box-sizing: border-box;
 }
@@ -45,12 +49,17 @@ const asideWidth = ref(wid)
   width: 220px;
   line-height: 40px;
   color: #fff;
-  background: tomato;
+  background-image: radial-gradient(circle,#80b892 0%,#46dda4 100%);
   outline: none;
   border: none;
   border-radius: 10px;
   cursor: pointer;
-  margin-top: 20px;
+  /* margin-top: 20px; */
+  font-size: medium;
+  margin: 0 auto;
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
 }
 
 </style>

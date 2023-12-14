@@ -1,16 +1,17 @@
 <template>
   <div class="home_wrapper">
-    <el-card class="box-card" v-loading="loading">
-      <div class="ai_talk">
+  <div class="ai_talk">
         <p class="AI_avatar">
           <img src="@/assets/svg/chat.svg" alt="">
         </p>
         <span>你好，欢迎来到“AI”做课平台，输入一些基本信息，开启你的AI做课之旅吧！</span>
       </div>
+    <el-card class="box-card" v-loading="loading">
+      
       <div class="ai_talk AI_content">
-        <p class="AI_avatar">
+        <!-- <p class="AI_avatar">
           <img src="@/assets/svg/chat.svg" alt="">
-        </p>
+        </p> -->
         <ul class="AI_content_ul">
           <li class="text_item">
             <p>您的课程主题是？</p> <el-input v-model="input1" placeholder="如：“AI”做课使用实操" />
@@ -27,15 +28,30 @@
           <li class="text_item">
             <p>其他补充说明</p> <el-input v-model="input5" placeholder="比如您希望包含的主要内容、案例等，您补充的细节越多，AI输出的内容越精准" />
           </li>
-          <li class="text_item upload_item">
-           <p @click="uploadFile">附件上传</p>
-            <!-- <p @click="">附件上传<input type="file" ></p> -->
-            <!-- 隐藏的文件输入元素 -->
-            <input type="file" ref="fileInputRef" style="display:none">
-            <el-input v-model="input6" placeholder="上传课程相关文档内容，或附上内容网址链接" />
+          <li class="text_item">
+            <p>附件上传</p> 
+            <!-- <el-input v-model="input6" placeholder="上传课程相关文档内容，或附上内容网址链接" /> -->
+            <el-upload
+    v-model:file-list="fileList"
+    class="el-input"
+    action="https://run.mocky.io/v3/9d059bf9-4660-45f2-925d-ce80ad6c4d15"
+    multiple
+    :on-preview="handlePreview"
+    :on-remove="handleRemove"
+    :before-remove="beforeRemove"
+    :limit="3"
+    :on-exceed="handleExceed"
+  >
+    <el-button type="primary">点击上传文件</el-button>
+    <!-- <template #tip>
+      <div class="el-upload__tip">
+        files with a size less than 5MB.
+      </div>
+    </template> -->
+  </el-upload>
           </li>
           <li class="text_item">
-            <button class="submit_btn" @click="handleCreateOutline">生成课程大纲</button>
+            <button class="submit_btn" @click="handleCreateOutline">生成课程大纲 →</button>
           </li>
           
         </ul>
@@ -57,13 +73,6 @@ const input4 = ref('')
 const input5 = ref('')
 const input6 = ref('')
 sessionStorage.setItem('isCollapse', false)
-
-const fileInputRef = ref(null);
-const uploadFile = () => {
-  // 通过ref获取文件输入元素并触发点击事件
-  fileInputRef.value.click();
-}
-
 const handleCreateOutline = () => {
   sessionStorage.setItem('isCollapse', true)
   loading.value = true
@@ -99,27 +108,21 @@ const handleCreateOutline = () => {
   list-style: none;
 }
 .text_item {
-  width: 80%;
+  width: 100%;
   line-height: 40px;
   list-style: none;
   display: flex;
   justify-content: space-between;
   margin-bottom: 15px;
 }
-.upload_item {
-  cursor: pointer;
-}
-.upload_item>.upload_wrap {
-  width: 45%;
-}
-
 .text_item p {
-  width: 45%;
+  width: 25%;
   border-radius: 10px;
   text-align: center;
   margin-right: 30px;
-  color: #fff;
-  background: rgb(91,155,213);
+  color: #000000;
+  background: rgb(232,247,243);
+  border: 1px solid #C6F3E6;
 }
 
 </style>

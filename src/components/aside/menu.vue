@@ -10,15 +10,15 @@
   >
     <el-menu-item index="1">
       <el-icon><icon-menu /></el-icon>
-      <template #title>新建课程</template>
+      <template #title><h3>新建课程</h3></template>
     </el-menu-item>
     <el-menu-item index="2">
       <el-icon><document /></el-icon>
-      <template #title>素材中心</template>
+      <template #title><h3>课程中心</h3></template>
     </el-menu-item>
     <el-menu-item index="3">
       <el-icon><setting /></el-icon>
-      <template #title>素材中心</template>
+      <template #title><h3>素材中心</h3></template>
     </el-menu-item>
   </el-menu>
 </template>
@@ -45,5 +45,6 @@ const handleClose = (key, keyPath) => {
 .el-menu-vertical-demo:not(.el-menu--collapse) {
   width: 200px;
   min-height: 400px;
+  background-color:transparent
 }
 </style>
