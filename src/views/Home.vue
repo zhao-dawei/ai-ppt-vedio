@@ -1,16 +1,17 @@
 <template>
   <div class="home_wrapper">
-    <el-card class="box-card" v-loading="loading">
-      <div class="ai_talk">
+  <div class="ai_talk">
         <p class="AI_avatar">
           <img src="@/assets/svg/chat.svg" alt="">
         </p>
         <span>你好，欢迎来到“AI”做课平台，输入一些基本信息，开启你的AI做课之旅吧！</span>
       </div>
+    <el-card class="box-card" v-loading="loading">
+      
       <div class="ai_talk AI_content">
-        <p class="AI_avatar">
+        <!-- <p class="AI_avatar">
           <img src="@/assets/svg/chat.svg" alt="">
-        </p>
+        </p> -->
         <ul class="AI_content_ul">
           <li class="text_item">
             <p>您的课程主题是？</p> <el-input v-model="input1" placeholder="如：“AI”做课使用实操" />
