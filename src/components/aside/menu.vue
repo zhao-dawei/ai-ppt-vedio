@@ -14,7 +14,7 @@
     </el-menu-item>
     <el-menu-item index="2">
       <el-icon><document /></el-icon>
-      <template #title>课程中心</template>
+      <template #title>素材中心</template>
     </el-menu-item>
     <el-menu-item index="3">
       <el-icon><setting /></el-icon>

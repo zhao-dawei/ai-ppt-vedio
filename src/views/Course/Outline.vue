@@ -10,55 +10,44 @@
       <h3 class="outline_head">大纲</h3>
       <article @click="handleClickEdit" v-show="!isEdit">
         <ul class="outline_ul">
-          <li class="content_tit">第一章：课题1</li>
-            <li>第一节：节目1</li>
-            <li>第二节：节目2</li>
-            <li>第三节：节目3</li>
-        </ul>
-        <ul class="outline_ul">
-          <li class="content_tit">第二章：课题2</li>
-            <li>第一节：节目1</li>
-            <li>第二节：节目2</li>
-            <li>第三节：节目3</li>
+          <li v-for="item in outlineTxtArr" :class="isTit(item) ? 'content_tit' : ''">{{ item }}</li>
         </ul>
       </article>
       <div class="edit_wrapper" v-show="isEdit">
-        <el-input type="textarea" v-model="textarea" autosize="true" />
+        <el-input type="textarea" v-model="textarea" autosize="true" @input="handleTextInp" />
         <el-button type="success" @click="handleOver">完成</el-button>
       </div>
       <button class="submit_btn" @click="next">生成对应内容</button>
     </div>
-    <!-- <el-dialog v-model="dialogFormVisible" title="修改大纲">
-      <el-form>
-        <el-form-item>
-          <el-input type="textarea" v-model="textarea" autosize="true" />
-          
-        </el-form-item>
-      </el-form>
-      <template #footer>
-        <span class="dialog-footer">
-          <el-button @click="dialogFormVisible = false">取消</el-button>
-          <el-button type="primary" @click="dialogFormVisible = false">
-            确定
-          </el-button>
-        </span>
-      </template>
-    </el-dialog> -->
   </div>
 </template>
 
 <script setup>
-import { ref } from "vue"
+import { ref, reactive, computed } from "vue"
 import router from "@/router";
 import {store} from "@/store"
-const dialogFormVisible = ref(false)
-const textarea = ref("第一章：课题1\n\t第一节：节目1\n\t第二节：节目2\n\t第三节：节目3\n\n第二章：课题2\n\t第一节：节目1\n\t第二节：节目2\n\t第三节：节目3")
+
+// 关联修改前和修改后
+// const textarea = ref("第一章：课题1\n\t第一节：节目1\n\t第二节：节目2\n\t第三节：节目3\n\n第二章：课题2\n\t第一节：节目1\n\t第二节：节目2\n\t第三节：节目3")
+const textarea = ref(store.outlineText)
+const outlineTxtArr = computed(() => {
+  return textarea.value.split(/\n\t|\n\n/)
+})
+const isTit = (v) => {
+  // 检查是否是章节标题
+  return v.indexOf("章") >= 0
+}
+
+
 const isEdit = ref(false)
 
 const loading = ref(false)
 
 const handleClickEdit = () => {
   isEdit.value = true
+}
+const handleTextInp = (e) => {
+  store.outlineText = e
 }
 const handleOver = () => {
   isEdit.value = false
@@ -117,6 +106,10 @@ article {
 .outline_ul {
   margin-bottom: 10px;
   padding: 0 10px;
+  cursor: pointer;
+}
+.outline_ul>.content_tit {
+  margin-top: 10px;
 }
 .outline_ul>li:not(.content_tit) {
   margin-left: 20px;
@@ -125,5 +118,8 @@ article {
 
 .edit_wrapper {
   width: 40%;
+}
+.edit_wrapper button{
+  margin-top: 20px;
 }
 </style>

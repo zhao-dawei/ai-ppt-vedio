@@ -37,7 +37,7 @@ const asideWidth = ref(wid)
   width: 100%;
   height: 100%;
   padding: 30px;
-  background:radial-gradient(circle,#EBF5F4,#C1F5E6);
+  background: #fa998d;
   /* border-radius: 50px; */
   box-sizing: border-box;
 }

@@ -8,15 +8,40 @@
     </div>
     <div class="else_wrapper">
       <div class="btns">
-        <p>生成测试题</p>
-        <p>生成宣传图</p>
+        <p @click="dialogVisible = true">生成测试题</p>
+        <p @click="imgDialogVisible = true">生成宣传图</p>
       </div>
     </div>
+
+    <el-dialog v-model="dialogVisible" title="测试题" width="30%" center>
+      <h2>测试题内容</h2>
+      <template #footer>
+        <span class="dialog-footer">
+          <el-button @click="dialogVisible = false">取消</el-button>
+          <el-button type="primary" @click="dialogVisible = false">
+            确定
+          </el-button>
+        </span>
+      </template>
+    </el-dialog>
+    <el-dialog v-model="imgDialogVisible" title="图片" width="30%" center>
+      <img class="dialog_img" src="@/assets/images/p1.jpeg" alt="">
+      <template #footer>
+        <span class="dialog-footer">
+          <el-button @click="imgDialogVisible = false">取消</el-button>
+          <el-button type="primary" @click="imgDialogVisible = false">
+            确定
+          </el-button>
+        </span>
+      </template>
+    </el-dialog>
   </div>
 </template>
 
 <script setup>
-
+import { ref } from "vue"
+const dialogVisible = ref(false)
+const imgDialogVisible = ref(false)
 </script>
 
 <style scoped>
@@ -50,5 +75,10 @@
   font-size: 30px;
   text-align: center;
   line-height: 200px;
+  cursor: pointer;
+}
+
+.dialog_img {
+  width: 100%;
 }
 </style>

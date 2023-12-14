@@ -27,8 +27,12 @@
           <li class="text_item">
             <p>其他补充说明</p> <el-input v-model="input5" placeholder="比如您希望包含的主要内容、案例等，您补充的细节越多，AI输出的内容越精准" />
           </li>
-          <li class="text_item">
-            <p>附件上传</p> <el-input v-model="input6" placeholder="上传课程相关文档内容，或附上内容网址链接" />
+          <li class="text_item upload_item">
+           <p @click="uploadFile">附件上传</p>
+            <!-- <p @click="">附件上传<input type="file" ></p> -->
+            <!-- 隐藏的文件输入元素 -->
+            <input type="file" ref="fileInputRef" style="display:none">
+            <el-input v-model="input6" placeholder="上传课程相关文档内容，或附上内容网址链接" />
           </li>
           <li class="text_item">
             <button class="submit_btn" @click="handleCreateOutline">生成课程大纲</button>
@@ -53,6 +57,13 @@ const input4 = ref('')
 const input5 = ref('')
 const input6 = ref('')
 sessionStorage.setItem('isCollapse', false)
+
+const fileInputRef = ref(null);
+const uploadFile = () => {
+  // 通过ref获取文件输入元素并触发点击事件
+  fileInputRef.value.click();
+}
+
 const handleCreateOutline = () => {
   sessionStorage.setItem('isCollapse', true)
   loading.value = true
@@ -95,6 +106,13 @@ const handleCreateOutline = () => {
   justify-content: space-between;
   margin-bottom: 15px;
 }
+.upload_item {
+  cursor: pointer;
+}
+.upload_item>.upload_wrap {
+  width: 45%;
+}
+
 .text_item p {
   width: 45%;
   border-radius: 10px;

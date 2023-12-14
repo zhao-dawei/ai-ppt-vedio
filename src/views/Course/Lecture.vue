@@ -9,35 +9,40 @@
     <div class="content_wrapper">
       <div class="outline_content">
         <h3 class="outline_head">PPT</h3>
-        <article>
-          <p class="content_tit">第一章：课题1</p>
-          <p>第一节：节目1</p>
-          <p>第二节：节目2</p>
-          <p>第三节：节目3</p>
-        </article>
-        <article>
-          <p class="content_tit">第二章：课题2</p>
-          <p>第一节：节目1</p>
-          <p>第二节：节目2</p>
-          <p>第三节：节目3</p>
-        </article>
+        <div class="ppt_wrap">
+          <div class="demo-image__lazy">
+            <el-image 
+                v-for="url in urls" 
+                :key="url" 
+                :src="url" 
+                :preview-src-list="urls"
+                lazy />
+          </div>
+        </div>
         <button class="submit_btn" @click="next">讲稿确认完毕 请生成视频</button>
       </div>
       <div class="content_con">
         <h3 class="outline_head">讲稿</h3>
         <div class="lecture_text" @click="handleClickLecture" v-show="!isEdit">
-          <p class="content_tit">讲稿1</p>
-            <p>&nbsp;&nbsp;第一节：节目1</p>
-            <p>&nbsp;&nbsp;第二节：节目2</p>
-            <p>&nbsp;&nbsp;第三节：节目3</p>
-          <br>
-          <p class="content_tit">讲稿2</p>
-            <p>&nbsp;&nbsp;第一节：节目1</p>
-            <p>&nbsp;&nbsp;第二节：节目2</p>
-            <p>&nbsp;&nbsp;第三节：节目3</p>
+          <article>
+            <ul class="outline_ul">
+              <li v-for="item in lectureTxtArr" :class="isTit(item) ? 'content_tit' : ''">{{ item }}</li>
+            </ul>
+          </article>
         </div>
         <div class="edit_lecture_wrapper" v-show="isEdit">
-          <el-input v-model="textarea" type="textarea" autosize="true" placeholder="Please input content" />
+          <!-- <el-input 
+            v-model="textarea" 
+            type="textarea" 
+            autosize="true" 
+            placeholder="Please input content" 
+            @input="handleTextInp"
+            /> -->
+          <textarea 
+            v-model="textarea"
+            placeholder="Please input content"
+            @input="handleTextInp"
+          ></textarea>
           <el-button type="success" @click="handleOver">完成</el-button>
         </div>
       </div>
@@ -47,10 +52,33 @@
 </template>
 
 <script setup>
-import {ref} from "vue"
+import { ref, computed } from "vue"
 import { store } from "@/store"
 import router from "@/router";
-const textarea = ref('第一章：课题1\n\t第一节：节目1\n\t第二节：节目2\n\t第三节：节目3\n\n第二章：课题2\n\t第一节：节目1\n\t第二节：节目2\n\t第三节：节目3')
+import p1 from "@/assets/images/p1.jpeg"//引入本地图片
+// const textarea = ref('第一章：课题1\n\t第一节：节目1\n\t第二节：节目2\n\t第三节：节目3\n\n第二章：课题2\n\t第一节：节目1\n\t第二节：节目2\n\t第三节：节目3')
+const textarea = ref(store.lectureText)
+const lectureTxtArr = computed(() => {
+  return textarea.value.split(/\n\t|\n\n/)
+})
+const urls = [
+  'https://fuss10.elemecdn.com/a/3f/3302e58f9a181d2509f3dc0fa68b0jpeg.jpeg',
+  'https://fuss10.elemecdn.com/1/34/19aa98b1fcb2781c4fba33d850549jpeg.jpeg',
+  'https://fuss10.elemecdn.com/0/6f/e35ff375812e6b0020b6b4e8f9583jpeg.jpeg',
+  'https://fuss10.elemecdn.com/9/bb/e27858e973f5d7d3904835f46abbdjpeg.jpeg',
+  'https://fuss10.elemecdn.com/d/e6/c4d93a3805b3ce3f323f7974e6f78jpeg.jpeg',
+  'https://fuss10.elemecdn.com/3/28/bbf893f792f03a54408b3b7a7ebf0jpeg.jpeg',
+  'https://fuss10.elemecdn.com/2/11/6535bcfb26e4c79b48ddde44f4b6fjpeg.jpeg',
+  p1
+]
+const isTit = (v) => {
+  // 检查是否是章节标题
+  return v.indexOf("讲稿") >= 0
+}
+const handleTextInp = (e) => {
+  store.lectureText = e
+}
+
 const isEdit = ref(false)
 
 const handleClickLecture = () => {
@@ -123,5 +151,38 @@ article>p:not(.content_tit) {
 
 .edit_lecture_wrapper button{
   margin-top: 20px;
+}
+
+.edit_lecture_wrapper textarea {
+  width: 100%;
+  height: 400px;
+  padding: 10px;
+  color: #333;
+  border: 1px solid #aaa;
+  border-radius: 3px;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.outline_ul {
+  margin-bottom: 10px;
+  padding: 0 10px;
+}
+.outline_ul>li:not(.content_tit) {
+  margin-left: 20px;
+  list-style-type:circle;
+}
+
+.demo-image__lazy {
+  height: 400px;
+  overflow-y: auto;
+}
+.demo-image__lazy .el-image {
+  display: block;
+  min-height: 200px;
+  margin-bottom: 10px;
+}
+.demo-image__lazy .el-image:last-child {
+  margin-bottom: 0;
 }
 </style>
