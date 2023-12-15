@@ -7,12 +7,13 @@
       <span>根据你提供的信息，我们推荐课程大纲如下，如需调整，可直接点击文稿调整</span>
     </div>
     <div class="outline_content">
-      <h3 class="outline_head">大纲</h3>
-      <article @click="handleClickEdit" v-show="!isEdit">
+      <!-- <h3 class="outline_head">大纲</h3> -->
+      <article @click="handleClickEdit" v-show="!isEdit" id="show_outline" style="display:none">
         <ul class="outline_ul">
           <li v-for="item in outlineTxtArr" :class="isTit(item) ? 'content_tit' : ''">{{ item }}</li>
         </ul>
       </article>
+      <div id="output"></div>
       <div class="edit_wrapper" v-show="isEdit">
         <!-- <el-input type="textarea" v-model="textarea" autosize="true" @input="handleTextInp" /> -->
         <textarea 
@@ -22,13 +23,13 @@
           ></textarea>
         <el-button type="success" @click="handleOver">完成</el-button>
       </div>
-      <button v-show="!isEdit" class="submit_btn" @click="next">生成对应内容</button>
+      <button v-show="!isEdit" class="submit_btn" @click="next" id="generateContent">生成对应内容</button>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref, reactive, computed } from "vue"
+import { ref, reactive, computed, onMounted } from "vue"
 import router from "@/router";
 import {store} from "@/store"
 
@@ -65,6 +66,34 @@ const next = () => {
     router.push('/course/content')
   }, 2000)
 }
+
+onMounted(() => {
+
+  const outputElement = document.getElementById("output");
+  const text = ref(store.streamOutline).value;
+  let currentIndex = 0;
+
+  function printText() {
+    if (currentIndex < text.length) {
+      const char = text.charAt(currentIndex);
+      currentIndex++;
+
+      if (char === "\r") {
+        outputElement.appendChild(document.createElement("br"));
+      } else {
+        outputElement.appendChild(document.createTextNode(char));
+      }
+      setTimeout(printText, 50); // Change delay here (in milliseconds)
+    }else{
+      console.log('daozhelema1')
+      document.getElementById("output").style.display = 'none';
+      document.getElementById("show_outline").style.display = 'block';
+      document.getElementById("generateContent").style.display = 'block';
+    }
+  }
+  printText();
+});
+
 </script>
 
 <style scoped>
@@ -138,5 +167,11 @@ article {
 }
 .edit_wrapper button{
   margin-top: 20px;
+}
+#show_outline {
+  display: none;
+}
+#generateContent {
+  display: none;
 }
 </style>
