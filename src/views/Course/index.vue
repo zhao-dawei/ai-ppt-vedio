@@ -64,14 +64,14 @@ const handleClickTab = (item, ind) => {
 }
 .link_btns ul li {
   list-style: none;
-  background: rgb(255, 242, 204);
+  background-color: transparent;
   padding: 10px 30px;
   border-radius: 10px;
   margin-bottom: 20px;
 }
 .link_btns ul .active_li {
   color: #fff;
-  background: #efaf39;
+  background: #3fdbcc;
 }
 .box-card {
     flex: 1;

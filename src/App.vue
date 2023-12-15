@@ -49,7 +49,7 @@ const asideWidth = ref(wid)
   width: 220px;
   line-height: 40px;
   color: #fff;
-  background-image: radial-gradient(circle,#80b892 0%,#46dda4 100%);
+  background-image: linear-gradient(120deg, #a6c0fe 0%, #f68084 100%);
   outline: none;
   border: none;
   border-radius: 10px;
