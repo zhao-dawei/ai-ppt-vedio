@@ -17,7 +17,7 @@
           v-model="textarea"
           @input="handleTextInp"
         ></textarea>
-        <button class="submit_btn" @click="next">PPT确认完毕 帮我生成配音讲稿</button>
+        <button class="submit_btn_ppt" @click="next">PPT确认完毕 帮我生成配音讲稿</button>
       </div>
       <div class="outline_content">
         <h3 class="outline_head">PPT</h3>
@@ -71,6 +71,19 @@ const next = () => {
 </script>
 
 <style scoped>
+.submit_btn_ppt {
+  width: 250px;
+  line-height: 40px;
+  color: #fff;
+  background-image: linear-gradient(120deg, #a6c0fe 0%, #f68084 100%);
+  outline: none;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  /* margin-top: 20px; */
+  font-size: medium;
+  margin: 0 auto;
+}
 .ai_talk {
   display: flex;
   align-items: center;
