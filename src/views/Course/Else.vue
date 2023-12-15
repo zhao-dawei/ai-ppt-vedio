@@ -14,7 +14,8 @@
     </div>
 
     <el-dialog v-model="dialogVisible" title="测试题" width="30%" center>
-      <h2>测试题内容</h2>
+      <h2>企业培训中课程制作的痛点和需求
+        在企业培训中，我们经常面临着课程制作的各种痛点和需求。传统的课程制作方式缺乏创新和互动性，难以满足员工的学习需求和提高培训效果。另外，不同岗位的员工面临的挑战和需求各不相同，因此需要定制化设计培训内容。跨地域的企业培训也面临着课程覆盖面和灵活性的问题。此外，企业还需要控制培训成本和评估培训效果</h2>
       <template #footer>
         <span class="dialog-footer">
           <el-button @click="dialogVisible = false">取消</el-button>

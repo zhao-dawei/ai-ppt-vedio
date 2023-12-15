@@ -9,12 +9,20 @@
         <div class="content_wrapper">
             <div class="outline_content">
               <h3 class="outline_head">大纲</h3>
-              <article>
+              <article @click="handleClickEdit" v-show="!isEdit">
                 <ul class="outline_ul">
                   <li v-for="item in outlineTxtArr" :class="isTit(item) ? 'content_tit' : ''">{{ item }}</li>
                 </ul>
               </article>
-              <button class="submit_btn" @click="next">内容确认完毕,帮我生成PPT</button>
+              <button v-show="!isEdit" class="submit_btn" @click="next">内容确认完毕,帮我生成PPT</button>
+              <div class="edit_wrapper content_con" v-show="isEdit">
+                <textarea 
+                    v-model="outlineTextarea"
+                    @input="handleEditOutline"
+                    placeholder="Please input content"
+                  ></textarea>
+                <el-button type="success" @click="handleOver">完成</el-button>
+              </div>
             </div>
             <div class="content_con">
                 <h3 class="outline_head">内容</h3>
@@ -41,17 +49,31 @@ import { ref, computed } from 'vue'
 import { store } from "@/store"
 import router from "@/router";
 // const textarea = ref('第一章：课题1\n\t第一节：节目1\n\t第二节：节目2\n\t第三节：节目3\n\n第二章：课题2\n\t第一节：节目1\n\t第二节：节目2\n\t第三节：节目3')
-const textarea = ref(store.outlineText)
-// const outlineTxtArr = computed(() => {
-//   return textarea.value.split(/\n\t|\n\n/)
-// })
-const outlineTxtArr = store.outlineText.split(/\n\t|\n\n/)
+const outlineTextarea = ref(store.outlineText)
+const textarea = ref(store.contentText)
+const outlineTxtArr = computed(() => {
+  return outlineTextarea.value.split(/\n\t|\n\n/)
+})
+// const outlineTxtArr = store.outlineText.split(/\n\t|\n\n/)
 const isTit = (v) => {
   // 检查是否是章节标题
   return v.indexOf("章") >= 0
 }
+const isEdit = ref(false)
+
 const handleTextInp = (e) => {
+  store.contentText = e.target.value
+}
+const handleClickEdit = () => {
+  isEdit.value = true
+}
+
+
+const handleEditOutline = (e) => {
   store.outlineText = e.target.value
+}
+const handleOver = () => {
+  isEdit.value = false
 }
 
 const loading = ref(false)
@@ -104,6 +126,7 @@ article {
   line-height: 30px;
   height: 400px;
   box-sizing: border-box;
+  overflow: auto;
 }
 article>p:not(.content_tit) {
   margin-left: 10px;

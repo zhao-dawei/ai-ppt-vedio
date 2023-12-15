@@ -14,10 +14,15 @@
         </ul>
       </article>
       <div class="edit_wrapper" v-show="isEdit">
-        <el-input type="textarea" v-model="textarea" autosize="true" @input="handleTextInp" />
+        <!-- <el-input type="textarea" v-model="textarea" autosize="true" @input="handleTextInp" /> -->
+        <textarea 
+            v-model="textarea"
+            placeholder="Please input content"
+            @input="handleTextInp"
+          ></textarea>
         <el-button type="success" @click="handleOver">完成</el-button>
       </div>
-      <button class="submit_btn" @click="next">生成对应内容</button>
+      <button v-show="!isEdit" class="submit_btn" @click="next">生成对应内容</button>
     </div>
   </div>
 </template>
@@ -47,7 +52,7 @@ const handleClickEdit = () => {
   isEdit.value = true
 }
 const handleTextInp = (e) => {
-  store.outlineText = e
+  store.outlineText = e.target.value
 }
 const handleOver = () => {
   isEdit.value = false
@@ -101,6 +106,8 @@ article {
   border-radius: 10px;
   margin-bottom: 20px;
   line-height: 30px;
+  height: 400px;
+  overflow: auto;
 }
 
 .outline_ul {
@@ -118,6 +125,16 @@ article {
 
 .edit_wrapper {
   width: 40%;
+}
+.edit_wrapper textarea {
+  width: 100%;
+  height: 400px;
+  padding: 10px;
+  color: #333;
+  border: 1px solid #aaa;
+  border-radius: 3px;
+  outline: none;
+  box-sizing: border-box;
 }
 .edit_wrapper button{
   margin-top: 20px;

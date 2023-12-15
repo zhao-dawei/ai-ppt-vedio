@@ -18,12 +18,17 @@
           <button class="submit_btn" @click="next">课程制作完毕，点击下载</button>
         </div>
         <div class="edit_lecture_wrapper" v-show="isEdit">
-          <el-input 
+          <!-- <el-input 
               v-model="textarea" 
               type="textarea" 
               autosize="true" 
               placeholder="Please input content" 
-              @input="handleTextInp"/>
+              @input="handleTextInp"/> -->
+          <textarea 
+              v-model="textarea"
+              placeholder="Please input content"
+              @input="handleTextInp"
+            ></textarea>
           <el-button type="success" @click="handleOver">完成</el-button>
         </div>
       </div>
@@ -146,6 +151,7 @@ article {
   line-height: 30px;
   height: 320px;
   box-sizing: border-box;
+  overflow: auto;
 }
 article>p:not(.content_tit) {
   margin-left: 10px;
@@ -158,6 +164,17 @@ article>p:not(.content_tit) {
 
 .edit_lecture_wrapper button{
   margin-top: 20px;
+}
+
+.edit_lecture_wrapper textarea {
+  width: 100%;
+  height: 320px;
+  padding: 10px;
+  color: #333;
+  border: 1px solid #aaa;
+  border-radius: 3px;
+  outline: none;
+  box-sizing: border-box;
 }
 
 .video_wrapper {
