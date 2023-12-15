@@ -56,7 +56,7 @@ const asideWidth = ref(wid)
   cursor: pointer;
   /* margin-top: 20px; */
   font-size: medium;
-  margin: 0 auto;
+  margin: 14px auto;
   /* display: flex;
   justify-content: center;
   align-items: center; */
