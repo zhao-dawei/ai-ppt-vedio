@@ -75,7 +75,7 @@ const next = () => {
   height: 40px;
   border-radius: 50%;
   color: #fff;
-  background: rgb(25, 195, 125);
+  background: rgb(111, 219, 175);
   display: flex;
   align-items: center;
   justify-content: center;
