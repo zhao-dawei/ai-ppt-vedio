@@ -76,7 +76,7 @@ const isTit = (v) => {
   return v.indexOf("讲稿") >= 0
 }
 const handleTextInp = (e) => {
-  store.lectureText = e
+  store.lectureText = e.target.value
 }
 
 const isEdit = ref(false)
