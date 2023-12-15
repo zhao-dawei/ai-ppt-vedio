@@ -42,7 +42,7 @@
     :limit="3"
     :on-exceed="handleExceed"
   >
-    <el-button type="primary">点击上传文件</el-button>
+    <el-button size="large" style='background-color:#69c3df;color:#fff'>点击上传文件</el-button>
     <!-- <template #tip>
       <div class="el-upload__tip">
         files with a size less than 5MB.

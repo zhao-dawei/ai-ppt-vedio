@@ -71,7 +71,7 @@ const handleClickTab = (item, ind) => {
 }
 .link_btns ul .active_li {
   color: #fff;
-  background: #3fdbcc;
+  background: rgb(105, 195, 223);
 }
 .box-card {
     flex: 1;
