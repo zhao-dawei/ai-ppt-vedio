@@ -1,6 +1,7 @@
 <template>
   <div class="layout_header">
-    <h2>“AI”做课</h2>
+    <!-- <h2>“AI”做课</h2> -->
+    <img src="@/assets/images/logo.png" alt="" style="width: 140px;margin-left: 20px">
     <h3><span>用户中心</span><el-icon><Avatar /></el-icon></h3>
   </div>
 </template>
