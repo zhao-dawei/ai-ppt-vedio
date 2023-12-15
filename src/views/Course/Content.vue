@@ -14,7 +14,7 @@
                   <li v-for="item in outlineTxtArr" :class="isTit(item) ? 'content_tit' : ''">{{ item }}</li>
                 </ul>
               </article>
-              <button v-show="!isEdit" class="submit_btn" @click="next">内容确认完毕,帮我生成PPT</button>
+              <button v-show="!isEdit" class="submit_btn" @click="next" id="generatePPT">内容确认完毕,帮我生成PPT</button>
               <div class="edit_wrapper content_con" v-show="isEdit">
                 <textarea 
                     v-model="outlineTextarea"
@@ -24,8 +24,10 @@
                 <el-button type="success" @click="handleOver">完成</el-button>
               </div>
             </div>
+            
             <div class="content_con">
                 <h3 class="outline_head">内容</h3>
+                <div id="output"></div>
                 <!-- <el-input
                     v-model="textarea"
                     type="textarea"
@@ -37,6 +39,7 @@
                   v-model="textarea"
                   placeholder="Please input content"
                   @input="handleTextInp"
+                   id="show_content"
                 ></textarea>
             </div>
         </div>
@@ -45,7 +48,7 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { store } from "@/store"
 import router from "@/router";
 // const textarea = ref('第一章：课题1\n\t第一节：节目1\n\t第二节：节目2\n\t第三节：节目3\n\n第二章：课题2\n\t第一节：节目1\n\t第二节：节目2\n\t第三节：节目3')
@@ -84,6 +87,33 @@ const next = () => {
     router.push('/course/ppt')
   }, 2000)
 }
+
+onMounted(() => {
+
+  const outputElement = document.getElementById("output");
+  const text = ref(store.streamOutline).value;
+  let currentIndex = 0;
+
+  function printText() {
+    if (currentIndex < text.length) {
+      const char = text.charAt(currentIndex);
+      currentIndex++;
+
+      if (char === "\r") {
+        outputElement.appendChild(document.createElement("br"));
+      } else {
+        outputElement.appendChild(document.createTextNode(char));
+      }
+      setTimeout(printText, 50); // Change delay here (in milliseconds)
+    }else{
+      console.log('daozhelema1')
+      document.getElementById("output").style.display = 'none';
+      document.getElementById("show_content").style.display = 'block';
+      document.getElementById("generatePPT").style.display = 'block';
+    }
+  }
+  printText();
+});
 </script>
 
 <style scoped>
@@ -154,5 +184,14 @@ article>p:not(.content_tit) {
 .outline_ul>li:not(.content_tit) {
   margin-left: 20px;
   list-style-type:circle;
+}
+#show_content {
+  display: none;
+}
+/* #output {
+  margin-left:40px
+} */
+#generatePPT {
+  display: none;
 }
 </style>
