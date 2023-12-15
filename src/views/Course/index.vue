@@ -58,6 +58,7 @@ const handleClickTab = (item, ind) => {
 <style scoped>
 .course_wrapper {
     display: flex;
+    margin-top: 20px;
 }
 .link_btns {
     margin-right: 20px;

@@ -36,7 +36,7 @@ const asideWidth = ref(wid)
 .common-layout {
   width: 100%;
   height: 100%;
-  padding: 30px;
+  padding: 20px;
   /* background: radial-gradient(circle,#EBF5F4,#C1F5E6); */
   background-image: linear-gradient(-225deg, #E3FDF5 0%, #FFE6FA 100%);
   /* background-image: linear-gradient(-225deg, #2CD8D5 0%, #C5C1FF 56%, #FFBAC3 100%); */
