@@ -176,6 +176,9 @@ article>p:not(.content_tit) {
   outline: none;
   box-sizing: border-box;
 }
+.outline_ul>li:hover {
+  color: yellow;
+}
 
 .outline_ul {
   margin-bottom: 10px;
