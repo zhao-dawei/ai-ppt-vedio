@@ -14,6 +14,11 @@ const router = createRouter({
       component: () => import('../views/About.vue')
     },
     {
+      path: '/demo',
+      name: 'demo',
+      component: () => import('../views/demo.vue')
+    },
+    {
       path: '/course',
       name: 'course',
       redirect: '/course/outline',
