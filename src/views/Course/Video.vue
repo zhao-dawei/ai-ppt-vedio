@@ -32,12 +32,6 @@
           <el-button type="success" @click="handleOver">完成</el-button>
         </div>
       </div>
-      <div class="video_wrapper">
-        <h3 class="outline_head">视频</h3>
-        <div class="video_box">
-          <video src="@/assets/images/v1.mp4" controls></video>
-        </div>
-      </div>
       <div class="tag_wrapper">
         <div class="tag_wrap">
           <div class="tag_tit"><p>PPT加配音</p></div>
@@ -69,11 +63,19 @@
           </div>
         </div>
       </div>
+      <div class="video_wrapper">
+        <h3 class="outline_head">视频</h3>
+        <div class="video_box">
+          <video src="@/assets/images/v1.mp4" controls :hidden="isHidden"></video>
+        </div>
+      </div>
+
     </div>
   </div>
 </template>
 
 <script setup>
+const isHidden = ref(true);
 import { ref, computed } from "vue"
 import { store } from "@/store"
 import router from "@/router";
@@ -101,11 +103,13 @@ const handleOver = () => {
 
 const loading = ref(false)
 const next = () => {
-  loading.value = true
-  setTimeout(() => {
+  /*loading.value = true*/
+  isHidden.value=false
+/*  setTimeout(() => {
     store.activeIndex += 1
     router.push('/course/else')
-  }, 2000)
+  }, 2000)*/
+
 }
 </script>
 
